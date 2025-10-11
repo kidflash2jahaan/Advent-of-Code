@@ -999,10 +999,16 @@ puzzle_input = """4x23x21
 20x29x30
 23x11x5"""
 
+import numpy as np
+
 paper = 0
+ribbon = 0
 for line in puzzle_input.split():
     x, y, z = line.split("x")
     x, y, z = int(x), int(y), int(z)
-    paper += 2*x*y + 2*y*z + 2*x*z + min(x*y, y*z, x*z)
+    x, y, z = sorted([x, y, z])
+    paper += 2*x*y + 2*y*z + 2*x*z + np.min([x*y, y*z, x*z])
+    ribbon += 2*x + 2*y + x*y*z
 
 print(paper)
+print(ribbon)
