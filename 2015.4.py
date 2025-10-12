@@ -4,7 +4,7 @@ import hashlib
 
 i = 1
 while True:
-    if hashlib.md5((puzzle_input + str(i)).encode()).hexdigest().startswith("00000"):
+    if hashlib.md5((puzzle_input + str(i)).encode()).hexdigest().startswith("000000"):
         break
     i += 1
 
