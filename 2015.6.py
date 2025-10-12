@@ -299,8 +299,6 @@ toggle 534,948 through 599,968
 turn on 522,730 through 968,950
 turn off 102,229 through 674,529"""
 
-import numpy as np
-
 lights = {}
 for x in range(1000):
     for y in range(1000):
