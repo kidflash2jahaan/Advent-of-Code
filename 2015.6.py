@@ -304,7 +304,7 @@ import numpy as np
 lights = {}
 for x in range(1000):
     for y in range(1000):
-        lights[(x, y)] = False
+        lights[(x, y)] = 0
 
 i = 0
 for line in puzzle_input.split("\n"):
@@ -321,21 +321,20 @@ for line in puzzle_input.split("\n"):
         while y <= y2:
             match type:
                 case "on":
-                    lights[(x, y)] = True
+                    lights[(x, y)] += 1
                 case "off":
-                    lights[(x, y)] = False
+                    lights[(x, y)] = max(lights[(x, y)] - 1, 0)
                 case "toggle":
-                    lights[(x, y)] = not lights[(x, y)]
+                    lights[(x, y)] += 2
             y += 1
         x += 1
     
     print(i)
     i += 1
 
-lights_on = 0
+total_brightness = 0
 for x in range(1000):
     for y in range(1000):
-        if lights[(x, y)] == True:
-            lights_on += 1
+        total_brightness += lights[(x, y)]
 
-print(lights_on)
+print(total_brightness)
