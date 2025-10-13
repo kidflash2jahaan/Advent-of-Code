@@ -1,9 +1,8 @@
 puzzle_input = "1113222113"
 
-
 previous_result = puzzle_input
 i = 0
-while i < 40:
+while i < 50:
     number_groups = ['remove']
     for char in previous_result:
         if number_groups[-1].endswith(char):
@@ -20,5 +19,6 @@ while i < 40:
 
     previous_result = result
     i += 1
+    print(i)
 
 print(len(previous_result))
