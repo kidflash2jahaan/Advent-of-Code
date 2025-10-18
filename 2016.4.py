@@ -973,20 +973,24 @@ krxqjijamxdb-kdwwh-vjatncrwp-823[kvmoi]
 tpspahyf-nyhkl-kfl-aljouvsvnf-981[flahk]
 bxaxipgn-vgpst-qphzti-rdcipxcbtci-635[ipctx]"""
 
-id_sum = 0
+possible_names = {}
 for line in puzzle_input.split("\n"):
-    line_split = line.replace("[", "-").replace("]", "").split("-")
-    name = "".join(line_split[:-2])
-    id = int(line_split[-2])
-    checksum = line_split[-1]
+    id = int(line[-10:-7])
+    encrypted_name = line[:-11]
+    decrypted_name = ""
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    letter_frequency = {}
-
-    for letter in alphabet:
-        letter_frequency[letter] = name.count(letter)
-
-    correct_checksum = "".join(sorted(letter_frequency, key=letter_frequency.get, reverse=True)[:5])
-    if checksum == correct_checksum:
-        id_sum += id
-
-print(id_sum)
+    for encrypted_char in encrypted_name:
+        if encrypted_char == "-":
+            decrypted_char = " "
+        else:
+            decrypted_char = encrypted_char
+            for i in range(id):
+                index = alphabet.index(decrypted_char) + 1
+                if index == 26:
+                    index = 0
+                decrypted_char = alphabet[index]
+        decrypted_name += decrypted_char
+    if "object" in decrypted_name:
+        possible_names[id] = decrypted_name
+    
+print(possible_names)
