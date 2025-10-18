@@ -576,7 +576,7 @@ for column_number in range(len(puzzle_input.split("\n")[0])):
     column = []
     for line in puzzle_input.split("\n"):
         column.append(line[column_number])
-    result.append(max(set(column), key=column.count))
+    result.append(min(set(column), key=column.count))
 
 result = "".join(result)
 print(result)
