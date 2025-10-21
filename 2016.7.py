@@ -1999,34 +1999,36 @@ btrucplpxrokmcts[gytdxlzkfakenliallw]qhxznozsjsvhvnzhf
 nefefqadkmytguyp[ucqagcoyxinbrvbw]neksoxgtnnfojobtx[bxhdwvwfhybtbzkijj]poayieifsaocrboesfe[tnggfefcucifowqp]olmjwaqlaiwkkbtruw
 tivudfusgnewzshs[mausfjbgxmyibin]yponuityptavbhekrlg[qeyafuevtlqemtfa]owtdxadrwwbxbrkl[obfcyxbifipwhduubu]mjocivgvrcbrllso"""
 
-def check_abba(seq):
-    for i in range(len(seq) - 3):
-        if seq[i] + seq[i + 1] == seq[i + 3] + seq[i + 2] and seq[i] != seq[i + 1]:
-            return True
-    return False
+def check_aba(seq):
+    abas = []
+    for i in range(len(seq) - 2):
+        if seq[i] == seq[i + 2] and seq[i] != seq[i + 1]:
+            abas.append(seq[i] + seq[i + 1] + seq[i + 2])
 
-tls_supported = []
+    return abas
+
+ssl_supported_lines = []
 for line in puzzle_input.split("\n"):
     parts = line.replace("]", "[").split("[")
-    normals = []
+    supernets = []
     hypernets = []
     for i in range(len(parts)):
         if i % 2 == 0:
-            normals.append(parts[i])
+            supernets.append(parts[i])
         else:
             hypernets.append(parts[i])
 
-    hypernet_abba = False
-    for hypernet in hypernets:
-        if check_abba(hypernet):
-            hypernet_abba = True
+    ssl_supported = False
+    for supernet in supernets:
+        abas = check_aba(supernet)
+        if len(abas) > 0:
+            for aba in abas:
+                bab = aba[1] + aba[0] + aba[1]
+                for hypernet in hypernets:
+                    if bab in hypernet:
+                        ssl_supported = True
 
-    normal_abba = False
-    for normal in normals:
-        if check_abba(normal):
-            normal_abba = True
+    if ssl_supported:
+        ssl_supported_lines.append(line)
 
-    if not hypernet_abba and normal_abba:
-        tls_supported.append(line)
-
-print(len(tls_supported))
+print(len(ssl_supported_lines))
